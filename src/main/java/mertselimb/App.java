@@ -2,6 +2,7 @@ package mertselimb;
 
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfKeyPoint;
+import org.opencv.features2d.DescriptorExtractor;
 import org.opencv.features2d.FeatureDetector;
 import org.opencv.features2d.KeyPoint;
 import org.opencv.highgui.Highgui;
@@ -30,12 +31,19 @@ public class App {
         if (directoryListing != null) {
             for (File child : directoryListing) {
                 Mat objectImage = Highgui.imread(child.getAbsolutePath(), Highgui.CV_LOAD_IMAGE_COLOR);
+
                 MatOfKeyPoint objectKeyPoints = new MatOfKeyPoint();
-                FeatureDetector siftDetector = FeatureDetector.create(FeatureDetector.SURF);
+                FeatureDetector siftDetector = FeatureDetector.create(FeatureDetector.SIFT);
                 siftDetector.detect(objectImage, objectKeyPoints);
-                KeyPoint[] keyPoints = objectKeyPoints.toArray();
-                //System.out.println(keyPoints[0].toString());
-                keyPointList.add(keyPoints);
+
+
+                MatOfKeyPoint objectDescriptors = new MatOfKeyPoint();
+                DescriptorExtractor descriptorExtractor = DescriptorExtractor.create(DescriptorExtractor.SIFT);
+                descriptorExtractor.compute(objectImage, objectKeyPoints, objectDescriptors);
+
+
+                KeyPoint[] descriptors = objectDescriptors.toArray();
+                keyPointList.add(descriptors);
                 locations.add(new Location(child.getName().split(",")[0], child.getName().split(",")[1], child.getName().split(",")[2]));
             }
         }
