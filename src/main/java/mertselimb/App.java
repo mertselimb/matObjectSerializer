@@ -46,18 +46,18 @@ public class App {
         SerializableKeyPointArray images = new SerializableKeyPointArray();
         images.transformFromKeypointArray(keyPointList);
 
-        Serializer.serialize(images, "images.ser");
-        Serializer.serialize(locations, "locations.ser");
+        Serializer.serialize(images, "./out/images.ser");
+        Serializer.serialize(locations, "./out/locations.ser");
 
 
         cal = Calendar.getInstance();
         System.out.println("Serializer ended. " + sdf.format(cal.getTime()));
-//        SerializableKeyPointArray inImages = (SerializableKeyPointArray) Serializer.deSerialize("images.ser");
+//        SerializableKeyPointArray inImages = (SerializableKeyPointArray) Serializer.deSerialize("./out/images.ser");
 //        for (List<SerializableKeyPoint> k : inImages.arr) {
 //            System.out.println(k.get(0).toString());
 //        }
 //
-//        List<Location> inLocations = (List<Location>) Serializer.deSerialize("locations.ser");
+//        List<Location> inLocations = (List<Location>) Serializer.deSerialize("./out/locations.ser");
 //        for (Location loc : inLocations) {
 //            System.out.println(loc.x + " , " + loc.y + " , " + loc.degree);
 //        }
