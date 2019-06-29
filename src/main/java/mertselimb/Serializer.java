@@ -6,20 +6,20 @@ import java.util.List;
 
 public class Serializer {
 
-    public static void serialize(List<SerializableKeyPoint> list, String location) {
+    public static void serialize(Object obj, String path) {
         // Serialization
         try {
             //Saving of object in a file
-            FileOutputStream file = new FileOutputStream(location);
+            FileOutputStream file = new FileOutputStream(path);
             ObjectOutputStream out = new ObjectOutputStream(file);
 
             // Method for serialization of object
-            out.writeObject(list);
+            out.writeObject(obj);
 
             out.close();
             file.close();
 
-            System.out.println("Object has been serialized");
+//            System.out.println("Object has been serialized");
 
         } catch (IOException ex) {
             System.out.println("IOException is caught");
@@ -28,14 +28,14 @@ public class Serializer {
 
     }
 
-    public static List<SerializableKeyPoint> deSerialize(String location) {
+    public static Object deSerialize(String path) {
 
-        List<SerializableKeyPoint> inObject = new ArrayList<>();
+        Object inObject = new Object();
         try {
-            FileInputStream fis = new FileInputStream("file.ser");
+            FileInputStream fis = new FileInputStream(path);
             ObjectInputStream ois = new ObjectInputStream(fis);
 
-            inObject = (List<SerializableKeyPoint>) ois.readObject();
+            inObject = ois.readObject();
 
             ois.close();
             fis.close();
@@ -47,4 +47,7 @@ public class Serializer {
         }
         return inObject;
     }
+
+
+
 }

@@ -25,7 +25,7 @@ public class SerializableKeyPoint implements Serializable {
     }
 
     public String toString() {
-        return "KeyPoint [x= " + this.x +", y= " + this.y + ", size=" + this.size + ", angle=" + this.angle + ", response=" + this.response + ", octave=" + this.octave + ", class_id=" + this.class_id + "]";
+        return "SerializableKeyPoint [x= " + this.x +", y= " + this.y + ", size=" + this.size + ", angle=" + this.angle + ", response=" + this.response + ", octave=" + this.octave + ", class_id=" + this.class_id + "]";
     }
 
     public KeyPoint toKeyPoint(){
