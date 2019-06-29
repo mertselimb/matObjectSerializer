@@ -1,6 +1,7 @@
 package mertselimb;
 
 import org.opencv.core.Point;
+import org.opencv.features2d.KeyPoint;
 
 import java.io.Serializable;
 
@@ -25,5 +26,9 @@ public class SerializableKeyPoint implements Serializable {
 
     public String toString() {
         return "KeyPoint [x= " + this.x +", y= " + this.y + ", size=" + this.size + ", angle=" + this.angle + ", response=" + this.response + ", octave=" + this.octave + ", class_id=" + this.class_id + "]";
+    }
+
+    public KeyPoint toKeyPoint(){
+        return new KeyPoint(this.x, this.y, this.size, this.angle, this.response, this.octave, this.class_id);
     }
 }
