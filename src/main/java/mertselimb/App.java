@@ -15,7 +15,7 @@ public class App {
         nu.pattern.OpenCV.loadLibrary();
 
 
-        String imageLocation = "./src/main/java/mertselimb/test.JPG";
+        String imageLocation = "./images/test.JPG";
 
         Mat objectImage = Highgui.imread(imageLocation, Highgui.CV_LOAD_IMAGE_COLOR);
         MatOfKeyPoint objectKeyPoints = new MatOfKeyPoint();
@@ -33,49 +33,10 @@ public class App {
 
 
         String filename = "file.ser";
-        // Serialization
-        try {
-            //Saving of object in a file
-            FileOutputStream file = new FileOutputStream(filename);
-            ObjectOutputStream out = new ObjectOutputStream(file);
+        Serializer.serialize(outObject, filename);
 
-            // Method for serialization of object
-            out.writeObject(outObject);
+        List<SerializableKeyPoint> inObject = Serializer.deSerialize(filename);
 
-            out.close();
-            file.close();
-
-            System.out.println("Object has been serialized");
-
-        } catch (IOException ex) {
-            System.out.println("IOException is caught");
-            System.out.println(ex.toString());
-        }
-
-
-
-        List<SerializableKeyPoint> inObject;
-        try
-        {
-            FileInputStream fis = new FileInputStream("file.ser");
-            ObjectInputStream ois = new ObjectInputStream(fis);
-
-            inObject = (List<SerializableKeyPoint>) ois.readObject();
-
-            ois.close();
-            fis.close();
-        }
-        catch (IOException ioe)
-        {
-            ioe.printStackTrace();
-            return;
-        }
-        catch (ClassNotFoundException c)
-        {
-            System.out.println("Class not found");
-            c.printStackTrace();
-            return;
-        }
 
         System.out.println(inObject.get(0).toString());
     }
